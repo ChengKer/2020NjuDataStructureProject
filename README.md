@@ -11,21 +11,21 @@ a1-->a2
 a3(graph)
 a2-->a3
 a4(file)
-a6(g_distance)
-a7(g_paint)
-a8(g_selectInfo)
-a9(g_plan)
-a10(node)
 a3-->a4
+a5(g_distance)
+a3-->a5
+a6(g_paint)
 a3-->a6
+a7(g_selectInfo)
 a3-->a7
+a8(g_plan)
 a3-->a8
-a3-->a9
+a10(node)
 a4-->a10
+a5-->a10
 a6-->a10
 a7-->a10
 a8-->a10
-a9-->a10
 ```
 
 - **main**：程序运行的入口
