@@ -9,7 +9,7 @@ class HashTable {
 	int calc_hash(std::string name);
 public:
 	explicit HashTable(int size) :_size(size), _totoal_num(0) {
-		_table = new BinarySearchTree[34];
+		_table = new BinarySearchTree[_size];
 	};
 
 	bool insert(std::string name, int index);
