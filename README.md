@@ -6,25 +6,20 @@
 ```mermaid
 graph TB
 a1(main)
-a2(controller)
+a2(Controller)
 a1-->a2
-a3(graph)
+a3(Graph)
 a2-->a3
-a4(file)
+a4(File)
 a3-->a4
-a5(g_distance)
+subgraph SelectInfo
+a5(HashTable)
 a3-->a5
-a6(g_paint)
-a3-->a6
-a7(g_selectInfo)
+a6(BinarySearchTree)
+a5-->a6
+end
+a7(Node)
 a3-->a7
-a8(g_plan)
-a3-->a8
-a10(node)
-a5-->a10
-a6-->a10
-a7-->a10
-a8-->a10
 ```
 
 - **main**：程序运行的入口
