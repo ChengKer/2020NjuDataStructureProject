@@ -7,7 +7,7 @@
 const int PROVIENCE_NUM=34;
 const int EDGE_NUM = 50;
 const int MAX_DISTANCE = 999999;
-enum Color { RED = 0, BLUE = 1, GREEN = 2, YELLOW = 3, UNKNOWN = 4 };
+enum Color { UNKNOWN = 0 ,RED = 1, BLUE = 2, GREEN = 3, YELLOW = 4 };
 
 class Graph {
 	int _color_num;

@@ -107,11 +107,9 @@ int Graph::plan(Vector<Edge> *routes) {
 	MergeSort(_edges, 0, _edges.size()-1);
 	int cost = 0;
 	UnionFindSet ufs(PROVIENCE_NUM);
-	int k = 0;
 	for (int i = 0; i < _edges.size(); i++) {
 		if (ufs.Find(_edges[i].get_x()) != ufs.Find(_edges[i].get_y())) {
 			ufs.Union(_edges[i].get_x(), _edges[i].get_y());
-			k++;
 			cost += _edges[i].get_distance();
 			if (routes != NULL)routes->push_back(_edges[i]);
 		}
@@ -121,7 +119,6 @@ int Graph::plan(Vector<Edge> *routes) {
 
 
 int Graph::paint_province() {
-	if (_color_num == 0) {
 		for (int i = 0; i < PROVIENCE_NUM; i++) {
 			if (_color[i] == UNKNOWN) { //bfs
 				Queue q;
@@ -129,14 +126,14 @@ int Graph::paint_province() {
 				while (!q.empty()) {
 					int node = q.front();
 					q.pop();
-					bool color[4] = { 0,0,0,0 };
+					bool color[5] = { 0,0,0,0,0 };
 					for (int j = 0; j < PROVIENCE_NUM; j++) {
 						if (_graph[node][j] != -1) {
 							if (_color[j] != UNKNOWN)color[_color[j]] = true;
 							else q.push(j);
 						}
 					}
-					for (int k = 0; k < 4; k++) {
+					for (int k = 1; k <=4; k++) {
 						if (!color[k]) {
 							_color[node] = Color(k);
 							if (k > _color_num)_color_num = k;
@@ -146,10 +143,7 @@ int Graph::paint_province() {
 				}
 			}
 		}
-		_color_num += 1;
 		return _color_num;
-	}
-	else return _color_num;
 }
 
 std::string Graph::color_to_str(Color c) {
