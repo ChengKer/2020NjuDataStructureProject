@@ -2,7 +2,9 @@
 #include<iomanip>
 #include <stdlib.h>
 #include<iostream>
+#include<ctime>
 using namespace std;
+const int TEST_NUM = 100;
 
 void Controller::show_main_page() {
 	cout << "欢迎来到中国行政区域染色与信息查询系统！" << endl;
@@ -79,10 +81,10 @@ void Controller::distance() {
 			cout << route[0] << endl;
 		}
 		if (dis == -1) {
-			cout << "您输入的省名称有误！" << endl;
+			cout << "您输入的行政区域名称有误！" << endl;
 		}
 		else if (dis == MAX_DISTANCE) {
-			cout << "您输入的省之间无法连通！" << endl;
+			cout << "您输入的行政区域之间无法连通！" << endl;
 		}
 		else if (x == y) {
 			cout << "您输入的行政区域相同，距离为0！" << endl;
@@ -139,5 +141,43 @@ void Controller::Control() {
 	cout << "程序结束！" << endl;
 };
 
+void Controller::test() {
+	clock_t start;
+	clock_t end;
+	cout << "1. 测试：查询行政区域信息" << endl;
+	start = clock();
+	for (int i = 0; i < PROVIENCE_NUM; i++) {
+		string name = _g.get_name_by_index(i);
+		_g.select_info(name);
+	}
+	end = clock();
+	cout << "time use:" << (1000 * ((end - start) / (double)CLOCKS_PER_SEC)) / (double)PROVIENCE_NUM << "ms" << endl;
+
+	cout << "2. 测试：对区域进行染色" << endl;
+	start = clock();
+	for (int i = 0; i < TEST_NUM; i++) {
+		_g.paint_province();
+	}
+	end = clock();
+	cout << "time use:" << (1000 * ((end - start) / (double)CLOCKS_PER_SEC))/(double)TEST_NUM << "ms" << endl;
+
+	cout << "3. 测试：建立通信网" << endl;
+	start = clock();
+	for (int i = 0; i < TEST_NUM; i++) {
+		_g.plan();
+	}
+	end = clock();
+	cout << "time use:" << (1000 * ((end - start) / (double)CLOCKS_PER_SEC)) / (double)TEST_NUM << "ms" << endl;
+
+	cout << "4. 测试：查询行政区域距离" << endl;
+	start = clock();
+	for (int i = 0; i < TEST_NUM; i++) {
+		string city_x = _g.get_name_by_index(rand() % PROVIENCE_NUM);
+		string city_y = _g.get_name_by_index(rand() % PROVIENCE_NUM);
+		_g.get_distance(city_x, city_y);
+	}
+	end = clock();
+	cout << "time use:" << (1000 * ((end - start) / (double)CLOCKS_PER_SEC)) / (double)TEST_NUM << "ms" << endl;
+}
 
 

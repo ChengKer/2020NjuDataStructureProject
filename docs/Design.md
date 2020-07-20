@@ -36,15 +36,60 @@
 
 ###### 本项目主要功能的实现方法如下：
 
-**BuildGraph**：从 `INFO.txt` 文件中读取省名称和省详细信息，存储到`Graph`的数据成员 `_provience_list` 中，并初始化数据成员哈希表 `_name_to_index`，从`DISTANCE.txt` 中读取相邻行政区域之间的距离，并初始化数据成员距离矩阵 `_graph` 和边集 `_edges`
+- **BuildGraph**：
 
-**SelectInfo**：通过哈希表 `_name_to_index`获取输入行政区对应的编号，根据编号从 `_provience_list` 中取出相应的信息
+  - 实现：
+    - 从 `INFO.txt` 文件中读取省名称和省详细信息，存储到`Graph`的数据成员 `_provience_list` 中，并初始化数据成员哈希表 `_name_to_index`
+    - 从`DISTANCE.txt` 中读取相邻行政区域之间的距离，并初始化数据成员距离矩阵 `_graph` 和边集 `_edges`
 
-**PaintGraph**：采用广度优先搜索`(bfs)`实现，在算法运行的过程中采用 `Queue` 作为存放边的容器，具体实现见 `Graph.cpp` 中的`paint_province()` 方法
+  - 具体代码如下：设结点个数为$n$，边条数为 $m$ ，那么BuildGraph的总**时间复杂度**为 $O(n+m)$
 
-**Distance**：采用贝尔曼-福特算法实现，具体实现见 `Graph.cpp` 中的`get_distance()` 方法
+  <img src="./pics/image-20200720111819917.png" alt="image-20200720111819917" style="zoom: 80%;" />
 
-**Plan**：采用克鲁斯卡尔算法实现，先使用 `MergeSort` 对边集排序，在算法运行的过程中使用 `UnionFindSet` 检查是否成环。具体实现见 `Graph.cpp` 中的`plan()` 方法
+- **SelectInfo**：
+
+  - 实现：通过哈希表 `_name_to_index`获取输入行政区对应的编号，根据编号从 `_provience_list` 中取出相应的信息，调用流如下：
+
+    <img src="./pics/image-20200720141656236.png" alt="image-20200720141656236" style="zoom: 33%;" />
+
+  - 具体代码如下：
+
+    - `select_info` ，时间复杂度同 `find_index`
+
+      <img src="./pics/image-20200720113722825.png" alt="image-20200720113722825" style="zoom:80%;" />
+
+    - `find_index`，时间复杂度为同 `find`
+
+      <img src="./pics/image-20200720113847454.png" alt="image-20200720113847454" style="zoom:80%;" />
+
+    - `find`，设n为一棵BST中结点的个数，平均**时间复杂度**为 $O(logn)$，最坏情况下为 $O(n)$
+
+      <img src="./pics/image-20200720113948134.png" alt="image-20200720113948134" style="zoom:80%;" />
+
+  
+
+- **PaintGraph**：
+
+  - 实现：采用广度优先搜索`(bfs)`实现，在算法运行的过程中采用 `Queue` 作为存放边的容器，具体实现见 `Graph.cpp` 中的`paint_province()` 方法
+
+  - 具体代码如下：设图的顶点数为 $n$，边数为 $m$，**时间复杂度**为 $O(m+n)$
+
+    <img src="./pics/image-20200720115714586.png" alt="image-20200720115714586" style="zoom:80%;" />
+
+- **Distance**：
+
+  - 实现：采用贝尔曼-福特算法实现，具体实现见 `Graph.cpp` 中的`get_distance()` 方法
+
+  - 具体代码如下：设图中顶点个数为$n$，边数为 $m$，算法的**时间复杂度**为 $O(nm)$
+
+    <img src="./pics/image-20200720115821920.png" alt="image-20200720115821920" style="zoom:80%;" />
+
+- **Plan**：
+  - 实现：采用克鲁斯卡尔算法实现，先使用 `MergeSort` 对边集排序，在算法运行的过程中使用 `UnionFindSet` 检查是否成环。具体实现见 `Graph.cpp` 中的`plan()` 方法
+  
+  - 具体代码如下：设图的边数为 $m$，算法的时间复杂度为$O(mlogm)$
+  
+    <img src="./pics/image-20200720141755669.png" alt="image-20200720141755669" style="zoom:80%;" />
 
 
 

@@ -15,6 +15,7 @@ public:
 	explicit Controller(std::string provience_addr, std::string distance_addr):
 		_g(provience_addr,distance_addr) {};
 	void Control();
+	void test();
 };
 
 

@@ -143,7 +143,7 @@ int Graph::paint_province() {
 				}
 			}
 		}
-		return _color_num;
+	return _color_num;
 }
 
 std::string Graph::color_to_str(Color c) {
