@@ -1,8 +1,8 @@
 ## 模块划分
 
-#### 本项目共12个模块，划分如下：
+###### 本项目共12个模块，划分如下：
 
-![image-20200720083732553](C:\Users\Orange\AppData\Roaming\Typora\typora-user-images\image-20200720083732553.png)
+![image-20200720083732553](./pics/image-20200720083732553.png)
 
 **mian**：主模块，是程序的入口
 
@@ -24,9 +24,9 @@
 
 **Queue**：队列模块，用在`Paint` 功能的实现中，为 `bfs` 提供了存储结点的容器
 
-**HashTable**：哈希表模块，用在`SelectInfo` 功能的实现中和需要**通过行政区名**检索**行政区编号**的所有场景中，其采用链式开散列实现，每个“桶”都是一个`BST`，极大的提高了检索的效率，具体结构如下：
+**HashTable**：哈希表模块，用在`SelectInfo` 功能的实现中，通过**行政区名**检索**行政区编号**，其采用链式开散列实现，每个“桶”都是一个`BST`，极大的提高了检索的效率，具体结构如下：
 
-<img src="C:\Users\Orange\AppData\Roaming\Typora\typora-user-images\image-20200720083137931.png" alt="image-20200720083137931" style="zoom: 50%;" />
+<img src="./pics/image-20200720083137931.png" alt="image-20200720083137931" style="zoom: 50%;" />
 
 **BinarySearchTree**：二分查找树，用来作为 `HashTable` 每一个“桶”的数据结构
 
@@ -34,5 +34,17 @@
 
 ## 功能实现
 
-### 本项目主要功能的实现方法如下：
+###### 本项目主要功能的实现方法如下：
+
+**BuildGraph**：从 `INFO.txt` 文件中读取省名称和省详细信息，存储到`Graph`的数据成员 `_provience_list` 中，并初始化数据成员哈希表 `_name_to_index`，从`DISTANCE.txt` 中读取相邻行政区域之间的距离，并初始化数据成员距离矩阵 `_graph` 和边集 `_edges`
+
+**SelectInfo**：通过哈希表 `_name_to_index`获取输入行政区对应的编号，根据编号从 `_provience_list` 中取出相应的信息
+
+**PaintGraph**：采用广度优先搜索`(bfs)`实现，在算法运行的过程中采用 `Queue` 作为存放边的容器，具体实现见 `Graph.cpp` 中的`paint_province()` 方法
+
+**Distance**：采用贝尔曼-福特算法实现，具体实现见 `Graph.cpp` 中的`get_distance()` 方法
+
+**Plan**：采用克鲁斯卡尔算法实现，先使用 `MergeSort` 对边集排序，在算法运行的过程中使用 `UnionFindSet` 检查是否成环。具体实现见 `Graph.cpp` 中的`plan()` 方法
+
+
 
