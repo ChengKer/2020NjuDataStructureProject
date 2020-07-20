@@ -1,5 +1,6 @@
 #include"Controller.h"
 #include<iomanip>
+#include <stdlib.h>
 #include<iostream>
 using namespace std;
 
@@ -51,8 +52,7 @@ bool Controller::is_continue() {
 CH:	int choice;
 	cin >> choice;
 	bool continue_flag = true;
-	switch (choice)
-	{
+	switch (choice){
 	case 1:
 		break;
 	case 2:
@@ -67,13 +67,14 @@ CH:	int choice;
 
 void Controller::distance() {
 	do {
-		cout << "请输入两个行政区域名称(用空格隔开，当前仅支持省列表中的省名称，可以打印省列表获取各省名称)" << endl;
+		cout << "请输入两个行政区域名称(用空格隔开，当前仅支持行政区域列表中的省名称，可以打印行政区域列表获取各行政区域名称)" << endl;
 		string x;
 		string y;
 		Vector<string> route(10);
 		cin >> x >> y;
 		int dis = _g.get_distance(x, y, &route);
-		if (dis != -1 && dis != MAX_DISTANCE) {
+		if (dis != -1 && dis != MAX_DISTANCE && x!=y) {
+			cout << "距离为：" << dis << " 公里" << endl;
 			for (int i = route.size() - 1; i > 0; i--)cout<< route[i]<< "-->";
 			cout << route[0] << endl;
 		}
@@ -83,6 +84,9 @@ void Controller::distance() {
 		else if (dis == MAX_DISTANCE) {
 			cout << "您输入的省之间无法连通！" << endl;
 		}
+		else if (x == y) {
+			cout << "您输入的行政区域相同，距离为0！" << endl;
+		}
 		if (!is_continue())break;
 	} while (true);
 	clear();
@@ -90,7 +94,7 @@ void Controller::distance() {
 
 void Controller::select_info() {
 	do {
-		cout << "请输入行政区域名称(当前仅支持省列表中的省名称，可以打印省列表获取各省名称)" << endl;
+		cout << "请输入行政区域名称(当前仅支持行政区域列表中的行政区域名称，可以打印省列表获取各行政区域名称)" << endl;
 		string temp;
 		cin >> temp;
 		cout << _g.select_info(temp) << endl;

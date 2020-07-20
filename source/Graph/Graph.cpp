@@ -82,7 +82,7 @@ int Graph::get_distance(std::string city_x, std::string city_y, Vector<std::stri
 			}
 		}
 	}
-	if (route != NULL && dis_matrix[x][y]!=MAX_DISTANCE){
+	if (route != NULL && dis_matrix[x][y]!=MAX_DISTANCE && x!=y){
 		route->push_back(_province_list[y].get_name());
 		int last = last_city[y];
 		while (last != x) {
